@@ -39,3 +39,10 @@ Should you have any suggestions or questions, feel free to open an [issue](https
 ## License
 
 This repository and its contents are provided under the MIT License, which is detailed in the [LICENSE](LICENSE) file.
+
+## Screenshots
+![image](https://github.com/RolandSzB/create_apps_with_flutter/assets/125957801/af4a8c8c-79dd-4895-9676-6dea9696155b)
+![image](https://github.com/RolandSzB/create_apps_with_flutter/assets/125957801/14ad3d49-57ee-4264-9827-094c0337b3dc)
+![image](https://github.com/RolandSzB/create_apps_with_flutter/assets/125957801/8e2d112d-2f5d-4c20-83d3-ef70f97d5917)
+
+
