@@ -1,64 +1,117 @@
-// Copyright 2023 eduhoratiu <https://eduhoratiu.com/>
-// Use of this source code is governed by an MIT-style license that can be
-// found in the LICENSE file.
-
 import 'package:flutter/material.dart';
-
 import '../common/strings.dart' as strings;
 
-/// The home screen of the app.
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+  const HomeScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // Add an AppBar widget with a title and actions
       appBar: AppBar(
-        backgroundColor: Colors.purple.shade200,
+        backgroundColor: Colors.green.shade400,
         title: const Text(strings.homeScreenTitle),
-        actions: <Widget>[
-          // Add the copy icon button
+        actions: [
           IconButton(
-            onPressed: () {
-              print('Copy button pressed');
-            },
-            icon: const Icon(Icons.content_copy),
+            onPressed: () => showDummyWorld(context),
+            icon: const Icon(Icons.public),
           ),
-
-          // Add the search icon button
           IconButton(
             onPressed: () {},
             icon: const Icon(Icons.search),
           ),
         ],
       ),
-
-      // Add a floating action button and experiment with its properties
+      //cahts list
+      body: ListView(
+        children: const [
+          ChatWidget(
+            name: 'Profesor UEO',
+            message: 'Buna, de ce nu ai fost la curs?',
+            headIcon: Icon(Icons.person),
+          ),
+          Divider(), // Horizontal line after the ChatWidget
+          ChatWidget(
+            name: 'Coleg UEO',
+            message: 'Ai facut tema?',
+            headIcon: Icon(Icons.person),
+          ),
+          Divider(), // Horizontal line after the ChatWidget
+          ChatWidget(
+            name: 'Colega UEO',
+            message: 'Ti-am trimis pozele!',
+            headIcon: Icon(Icons.person),
+          ),
+          Divider(), // Horizontal line after the ChatWidget
+        ],
+      ),
       floatingActionButton: FloatingActionButton.extended(
-        backgroundColor: Colors.green,
-        focusColor: Colors.blue,
-        foregroundColor: Colors.red,
-        icon: const Icon(Icons.access_alarm),
-        label: const Text(strings.homeFABLabel),
-        mouseCursor: SystemMouseCursors.cell,
-        splashColor: Colors.orange,
-
-        // Show a dummy dialog box when the button is pressed
         onPressed: () => showDummyDialog(context),
+        label: const Text('NO'),
+        icon: const Icon(Icons.ac_unit),
+        focusColor: Colors.green,
+        splashColor: Colors.yellow,
+        foregroundColor: Colors.red,
+        mouseCursor: SystemMouseCursors.cell,
       ),
     );
   }
 
-  /// Shows a dummy dialog box with a title and content.
   void showDummyDialog(BuildContext context) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        // Build and return an AlertDialog widget
         return const AlertDialog(
-          title: Text(strings.dummyDialogBoxTitle),
-          content: Text(strings.dummyDialogBoxContent),
+          title: Text('Hello Dialog'),
+          content: Text('This is my content text for the dialog.'),
+        );
+      },
+    );
+  }
+
+  void showDummyWorld(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return const AlertDialog(
+          title: Text('Locaion Info'),
+          content: Text('You are in Romania!'),
+        );
+      },
+    );
+  }
+}
+
+class ChatWidget extends StatelessWidget {
+  final String name;
+  final String message;
+  final Icon headIcon;
+
+  const ChatWidget({
+    Key? key,
+    required this.name,
+    required this.message,
+    required this.headIcon,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      leading: CircleAvatar(
+        child: headIcon,
+      ),
+      title: Text(name),
+      subtitle: Text(message),
+      onTap: () {
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              backgroundColor: Colors.green.shade400,
+              title: Text('Chat with $name'),
+              content: Text('Unread: $message',
+                  style: const TextStyle(fontWeight: FontWeight.bold)),
+            );
+          },
         );
       },
     );
